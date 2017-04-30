@@ -351,6 +351,6 @@ public class Claim implements Serializable {
 				+ ", status=" + status + ", seen=" + seen + ", changedTimes=" + changedTimes + ", overDatelineProcess="
 				+ overDatelineProcess + ", canUploadMoreEvidence=" + canUploadMoreEvidence + ", lastDateRemind="
 				+ lastDateRemind + ", lastRemindUploadDate=" + lastRemindUploadDate + ", user=" + user + ", item="
-				+ item + ", evidences=" + evidences + ", circumstances=" + circumstances + "]";
+				;
 	}
 }

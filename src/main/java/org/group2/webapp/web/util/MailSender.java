@@ -73,7 +73,7 @@ public class MailSender {
 	private static String replaceVal(String str, Claim claim) {
 		LocalDateTime submitTime = LocalDateTime.ofInstant(claim.getCreated_time().toInstant(), ZoneId.systemDefault());
 		LocalDateTime now = LocalDateTime.now();
-
+		
 		str = str.replaceAll("_ITEM_TITLE", claim.getItem().getTitle());
 		str = str.replaceAll("_ASSESSMENT_TITLE", claim.getItem().getAssessment().getTitle());
 

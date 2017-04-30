@@ -57,11 +57,11 @@ public class ClaimChecker extends Thread {
 			try {
 				checkForAllClaim();
 				Thread.sleep(CHECK_FREQUENCY);
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-				logger.warn("Claim checker thread have been disabled!");
 			}
 		}
+		logger.warn("Claim checker thread have been disabled!");
 	}
 
 	/*
@@ -83,74 +83,75 @@ public class ClaimChecker extends Thread {
 
 		// Process for claim did not processed
 		List<Claim> claimsNotBeProcessed = claimRepository.findAllNotBeProcessed();
-//		for (Claim claim : claimsNotBeProcessed) {
-//			LocalDateTime submitDate = LocalDateTime.ofInstant(claim.getCreated_time().toInstant(),
-//					ZoneId.systemDefault());
-//			int code = 0;
-//			long numberOfDay = submitDate.until(today, ChronoUnit.DAYS);
-//			if (numberOfDay >= SO_NGAY_HET_HAN_XU_LY) {
-//				code = 1;
-//			} else if (numberOfDay >= SO_NGAY_NHAC_NHO_XY_LY) {
-//				code = 2;
-//			} else {
-//				continue;
-//			}
-//
-//			Date lastTimeRemindProcess = claim.getLastDateRemind();
-//			if (lastTimeRemindProcess == null || !today.toLocalDate()
-//					.equals(DateTimeUtils.dateToLocalDateTime(lastTimeRemindProcess).toLocalDate())) {
-//				claim.setLastDateRemind(DateTimeUtils.localDateTimeToDate(today));
-//				List<User> coordinators = userRepository.findAllUserByAuthorityAndFacultyId(
-//						AuthoritiesConstants.COORDINATOR, claim.getUser().getFaculty().getId());
-//
-//				if (code == 1) {
-//					claim.setOverDatelineProcess(true);
-//					logger.debug("het han xu ly claim: " + claim.getId());
-//					logger.debug("claim:"+claim);
-//					MailSender.informCoordinatorClaimDeadline(claim, coordinators);
-//				} else if (code == 2) {
-//					logger.debug("Nhac nho mail sap het han: " + claim.getId());
-//					MailSender.informCoordinatorClaimNearDeadline(claim, coordinators);
-//				}
-//				logger.debug("Saved claim after coordinator");
-//				claimRepository.save(claim);
-//			}
-//		}
+		for (Claim claim : claimsNotBeProcessed) {
+			LocalDateTime submitDate = LocalDateTime.ofInstant(claim.getCreated_time().toInstant(),
+					ZoneId.systemDefault());
+			int code = 0;
+			long numberOfDay = submitDate.until(today, ChronoUnit.DAYS);
+			if (numberOfDay >= SO_NGAY_HET_HAN_XU_LY) {
+				code = 1;
+			} else if (numberOfDay >= SO_NGAY_NHAC_NHO_XY_LY) {
+				code = 2;
+			} else {
+				continue;
+			}
+
+			Date lastTimeRemindProcess = claim.getLastDateRemind();
+			if (lastTimeRemindProcess == null || !today.toLocalDate()
+					.equals(DateTimeUtils.dateToLocalDateTime(lastTimeRemindProcess).toLocalDate())) {
+				claim.setLastDateRemind(DateTimeUtils.localDateTimeToDate(today));
+				List<User> coordinators = userRepository.findAllUserByAuthorityAndFacultyId(
+						AuthoritiesConstants.COORDINATOR, claim.getUser().getFaculty().getId());
+
+				if (code == 1) {
+					claim.setOverDatelineProcess(true);
+					logger.debug("het han xu ly claim: " + claim.getId());
+					logger.debug("claim:" + claim);
+					MailSender.informCoordinatorClaimDeadline(claim, coordinators);
+				} else if (code == 2) {
+					logger.debug("Nhac nho mail sap het han: " + claim.getId());
+					MailSender.informCoordinatorClaimNearDeadline(claim, coordinators);
+				}
+				logger.debug("Saved claim after coordinator");
+				claimRepository.save(claim);
+			}
+		}
 
 		// Remind for claim of student
 		List<Claim> tatCaClaimChuaHetHanNopClaim = claimRepository.findAllNotBeOverUploadEvidence();
-		logger.debug(claimsNotBeProcessed.size());
-		logger.debug(claimsNotBeProcessed.get(0));
-		
-		logger.debug(tatCaClaimChuaHetHanNopClaim.size());
-		logger.debug(tatCaClaimChuaHetHanNopClaim.get(0));
-		
-//		for (Claim claim : tatCaClaimChuaHetHanNopClaim) {
-//			LocalDateTime submit = DateTimeUtils.dateToLocalDateTime(claim.getCreated_time());
-//			int code = 0;
-//			long numberOfDay = submit.until(today, ChronoUnit.DAYS);
-//			if (numberOfDay >= SO_NGAY_HET_HAN_UPLOAD_EVIDENCE) {
-//				code = 1;
-//			} else if (numberOfDay >= SO_NGAY_NHAC_NHO_UPLOAD_EVIDENCE) {
-//				code = 2;
-//			} else {
-//				continue;
-//			}
-//
-//			if (code == 1) {
-//				claim.setCanUploadMoreEvidence(false);
-//				logger.debug("Het han nop evidence: " + claim.getId());
-//				MailSender.informStudentOverDeadlineEvidence(claim);
-//			} else if (code == 2) {
-//				LocalDateTime lastRemindDate = DateTimeUtils.dateToLocalDateTime(claim.getLastRemindUploadDate());
-//				if (lastRemindDate == null || !today.toLocalDate().equals(lastRemindDate.toLocalDate())) {
-//					claim.setLastRemindUploadDate(DateTimeUtils.localDateTimeToDate(today));
-//					logger.debug("Nhac nho nop evidence: " + claim.getId());
-//					MailSender.informStudentNearDeadlineEvidence(claim);
-//				}
-//			}
-//			claimRepository.save(claim);
-//		}
+		// logger.debug(tatCaClaimChuaHetHanNopClaim.size());
+		//
+		// logger.debug(tatCaClaimChuaHetHanNopClaim.get(0).getItem());
+		//
+		// logger.debug(claimsNotBeProcessed.size());
+		// logger.debug(claimsNotBeProcessed.get(0));
+
+		for (Claim claim : tatCaClaimChuaHetHanNopClaim) {
+			LocalDateTime submit = DateTimeUtils.dateToLocalDateTime(claim.getCreated_time());
+			int code = 0;
+			long numberOfDay = submit.until(today, ChronoUnit.DAYS);
+			if (numberOfDay >= SO_NGAY_HET_HAN_UPLOAD_EVIDENCE) {
+				code = 1;
+			} else if (numberOfDay >= SO_NGAY_NHAC_NHO_UPLOAD_EVIDENCE) {
+				code = 2;
+			} else {
+				continue;
+			}
+
+			if (code == 1) {
+				claim.setCanUploadMoreEvidence(false);
+				logger.debug("Het han nop evidence: " + claim.getId());
+				MailSender.informStudentOverDeadlineEvidence(claim);
+			} else if (code == 2) {
+				LocalDateTime lastRemindDate = DateTimeUtils.dateToLocalDateTime(claim.getLastRemindUploadDate());
+				if (lastRemindDate == null || !today.toLocalDate().equals(lastRemindDate.toLocalDate())) {
+					claim.setLastRemindUploadDate(DateTimeUtils.localDateTimeToDate(today));
+					logger.debug("Nhac nho nop evidence: " + claim.getId());
+					MailSender.informStudentNearDeadlineEvidence(claim);
+				}
+			}
+			claimRepository.save(claim);
+		}
 		// logger.debug("tatCaClaimChuaHetHanNopClaim:" +
 		// tatCaClaimChuaHetHanNopClaim.size());
 

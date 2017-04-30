@@ -115,11 +115,4 @@ public class Item implements Serializable {
 	public void setClosedDate(Date closedDate) {
 		this.closedDate = closedDate;
 	}
-
-	@Override
-	public String toString() {
-		return "Item [crn=" + crn + ", title=" + title + ", closedDate=" + closedDate + ", assessment=" + assessment
-				+ ", claim=" + claim + "]";
-	}
-
 }
