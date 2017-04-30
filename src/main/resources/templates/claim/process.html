@@ -1,168 +1,172 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+<head>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
 
-        <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.min.css" th:href="@{/lib/bootstrap/css/bootstrap.min.css}" />
-        <!-- <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap-theme.min.css" th:href="@{/lib/bootstrap/css/bootstrap-theme.min.css}" /> -->
-        <!-- <link rel="stylesheet" href="../static/css/core.css" th:href="@{/css/core.css}" /> -->
-        <link rel="stylesheet" href="../static/lib/adminlte/css/AdminLTE.min.css" th:href="@{/lib/adminlte/css/AdminLTE.min.css}" />
-        <link rel="stylesheet" href="../static/lib/adminlte/css/skins/skin-blue.css" th:href="@{/lib/adminlte/css/skins/_all-skins.min.css}" />
-        <link rel="stylesheet" href="../static/lib/iCheck/all.css" th:href="@{/lib/iCheck/all.css}" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.min.css" th:href="@{/lib/bootstrap/css/bootstrap.min.css}" />
+<!-- <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap-theme.min.css" th:href="@{/lib/bootstrap/css/bootstrap-theme.min.css}" /> -->
+<!-- <link rel="stylesheet" href="../static/css/core.css" th:href="@{/css/core.css}" /> -->
+<link rel="stylesheet" href="../static/lib/adminlte/css/AdminLTE.min.css" th:href="@{/lib/adminlte/css/AdminLTE.min.css}" />
+<link rel="stylesheet" href="../static/lib/adminlte/css/skins/skin-blue.css" th:href="@{/lib/adminlte/css/skins/_all-skins.min.css}" />
+<link rel="stylesheet" href="../static/lib/iCheck/all.css" th:href="@{/lib/iCheck/all.css}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-        <script src="../static/lib/jquery/jquery.js" th:src="@{/lib/jquery/jquery.js}"></script>
-        <script src="../static/lib/bootstrap/js/bootstrap.min.js" th:src="@{/lib/bootstrap/js/bootstrap.min.js}"></script>
-        <script src="../static/lib/adminlte/js/app.min.js" th:src="@{/lib/adminlte/js/app.min.js}"></script>
-        <script src="../static/lib/iCheck/icheck.min.js" th:src="@{/lib/iCheck/icheck.min.js}"></script>
-        <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+<script src="../static/lib/jquery/jquery.js" th:src="@{/lib/jquery/jquery.js}"></script>
+<script src="../static/lib/bootstrap/js/bootstrap.min.js" th:src="@{/lib/bootstrap/js/bootstrap.min.js}"></script>
+<script src="../static/lib/adminlte/js/app.min.js" th:src="@{/lib/adminlte/js/app.min.js}"></script>
+<script src="../static/lib/iCheck/icheck.min.js" th:src="@{/lib/iCheck/icheck.min.js}"></script>
+<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 
-        <title>Process claim</title>
-    </head>
-    <body class="hold-transition skin-green layout-top-nav">
-        <div class="wapper">
-            <div th:replace="fragments/header :: header"></div>
-            <div class="content-wrapper">
-                <div class="container">
-                    <section class="content-header">
-                        <h1>Process claim</h1>
-                    </section>
-                    <section class="content">
-                        <div class="box box-success">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Claim 2017-04-05</h3>
-                                <div class="pull-right">
-                                    <th:block th:switch="${claim.status}">
-                                        <div th:case="0">
-                                            <span class="label label-success">Done</span>
-                                        </div>
-                                        <div th:case="1">
-                                            <span class="label label-warning">Pending</span>
-                                        </div>
-                                        <div th:case="2">
-                                            <span class="label label-danger">Disabled</span>
-                                        </div>
-                                    </th:block>
-                                </div>
-                            </div>
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label>Claim ID#:</label><span th:text="${claim.id}"></span>
-                                </div>
+<title>Process claim</title>
+</head>
+<body class="hold-transition skin-green layout-top-nav">
+	<div class="wapper">
+		<div th:replace="fragments/header :: header"></div>
+		<div class="content-wrapper">
+			<div class="container">
+				<section class="content-header">
+					<h1>Process claim</h1>
+				</section>
+				<section class="content">
+					<div class="box box-success">
+						<div class="box-header with-border">
+							<h3 class="box-title">Claim 2017-04-05</h3>
+							<div class="pull-right">
 
-                                <div class="form-group">
-                                    <label>Item of assessment: </label><span th:text="${claim.item.title}"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label>Circumstances: </label><br />
-                                    <div th:each="cir : ${claim.circumstances}">
-                                        <label> <input type="checkbox" class="myCheckbox" disabled checked /> <span th:text="${cir.title}">circumstances</span>
-                                        </label>
+								<th:block th:switch="${claim.status}">
+									<span th:case="0" class="label label-success">Done</span>
 
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Content#:</label>
-                                    <textarea class="form-control ckeditor" style="resize: vertical;" th:text="${claim.content}" name="decision" rows="10" cols="80"
-                                              readonly="readonly"></textarea>
-                                </div>
-                                <div th:if="${evidences != null}" class="form-group">
-                                    <label>Evidences:</label>
+									<span th:case="1" class="label label-warning">Pending</span>
 
-                                    <div class="row">                                      
-                                        <div class="col-xs-4 col-md-2" th:each="evidence : ${evidences}" >
-                                            <div class="thumbnail" style="border: 0px" th:if="${#strings.endsWith(evidence,'.jpg')}">
-                                                <img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/jpgs-128.png">
-                                                <div class="caption" align="center">
-                                                    <p><a th:href="@{/evidents/} + ${evidence}" style="width: 100%; word-wrap: break-word;">
-                                                            <span th:text="${evidence}"></span>
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="thumbnail" style="border: 0px" th:if="${#strings.endsWith(evidence,'.png')}">
-                                                <img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/pngs-128.png">
-                                                <div class="caption" align="center">
-                                                    <p><a th:href="@{/evidents/} + ${evidence}" style="width: 100%; word-wrap: break-word;">
-                                                            <span th:text="${evidence}"></span>
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="thumbnail" style="border: 0px" th:if="${#strings.endsWith(evidence,'.doc')}">
-                                                <img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/docs-128.png">
-                                                <div class="caption" align="center">
-                                                    <p><a th:href="@{/evidents/} + ${evidence}" th:attr="download=${evidence}" style="width: 100%; word-wrap: break-word;">
-                                                            <span th:text="${evidence}"></span>
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="thumbnail" style="border: 0px" th:if="${#strings.endsWith(evidence,'.pdf')}">
-                                                <img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/pdfs-128.png">
-                                                <div class="caption" align="center">
-                                                    <p><a th:href="@{/evidents/} + ${evidence}" th:attr="download=${evidence}" style="width: 100%; word-wrap: break-word;">
-                                                            <span th:text="${evidence}"></span>
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>		
-                                    </div>
-                                </div>
+									<span th:case="2" class="label label-danger">Disabled</span>
+								</th:block>
+								<span th:if="${claim.overDatelineProcess}" class="label label-danger">Over Process Deadline</span>
 
-                                <div th:if="${evidences == null}" class="form-group">
-                                    <label>Evidences:</label>
-                                    <span>No evidence has been uploaded yet</span>
-                                </div>
+							</div>
+						</div>
+						<div class="box-body">
+							<div class="form-group">
+								<label>Student name:</label> <span th:text="${claim.user.firstName}"></span> <span th:text="${claim.user.lastName}"></span>
+							</div>
+							<div class="form-group">
+								<label>Faculty:</label> <span th:text="${claim.user.faculty.title}">1111</span>
+							</div>
+							<div class="form-group">
+								<label>Email:</label> <span th:text="${claim.user.email}">1111</span>
+							</div>
+							<div class="form-group">
+								<label>Claim ID#:</label><span th:text="${claim.id}"></span>
+							</div>
 
-                                <form th:action="@{/eccoordinator/claim/process}" method="post">
-                                    <input id="claimId" name="claimId" type="hidden" th:value="${claim.id}" />
-                                    <div class="form-group">
-                                        <label>Claim status</label>
-                                        <div>
-                                            <div>
-                                                <label> <input type="radio" value="0" name="status" class="minimal" th:checked="${claim.status==0}"> Done
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label> <input value="1" type="radio" name="status" class="minimal" th:checked="${claim.status==1}"> Pending
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label> <input value="2" type="radio" name="status" class="minimal" th:checked="${claim.status==2}"> Disabled
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Content</label>
-                                        <textarea class="ckeditor" id="contentEditor" th:text="${claim.decision}" name="decision" rows="10" cols="80"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <input class="btn btn-primary" type="submit" value="Save" />
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-            <div th:replace="fragments/footer :: footer"></div>
-        </div>
+							<div class="form-group">
+								<label>Item of assessment: </label><span th:text="${claim.item.title}"></span>
+							</div>
+							<div class="form-group">
+								<label>Circumstances: </label><br />
+								<div th:each="cir : ${claim.circumstances}">
+									<label> <input type="checkbox" class="myCheckbox" disabled checked /> <span th:text="${cir.title}">circumstances</span>
+									</label>
 
-        <script>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Claim content:</label>
+								<div class="thumbnail" th:utext="${claim.content}"></div>
+							</div>
+							<div th:if="${evidences != null}" class="form-group">
+								<label>Evidences:</label>
+
+								<div class="row">
+									<div class="col-xs-4 col-md-2" th:each="evidence : ${evidences}">
+										<div class="thumbnail" style="border: 0px" th:if="${#strings.endsWith(evidence,'.jpg')}">
+											<img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/jpgs-128.png">
+											<div class="caption" align="center">
+												<p>
+													<a th:href="@{/evidents/} + ${evidence}" style="width: 100%; word-wrap: break-word;"> <span th:text="${evidence}"></span>
+													</a>
+												</p>
+											</div>
+										</div>
+										<div class="thumbnail" style="border: 0px" th:if="${#strings.endsWith(evidence,'.png')}">
+											<img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/pngs-128.png">
+											<div class="caption" align="center">
+												<p>
+													<a th:href="@{/evidents/} + ${evidence}" style="width: 100%; word-wrap: break-word;"> <span th:text="${evidence}"></span>
+													</a>
+												</p>
+											</div>
+										</div>
+										<div class="thumbnail" style="border: 0px" th:if="${#strings.endsWith(evidence,'.doc')}">
+											<img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/docs-128.png">
+											<div class="caption" align="center">
+												<p>
+													<a th:href="@{/evidents/} + ${evidence}" th:attr="download=${evidence}" style="width: 100%; word-wrap: break-word;"> <span
+														th:text="${evidence}"></span>
+													</a>
+												</p>
+											</div>
+										</div>
+										<div class="thumbnail" style="border: 0px" th:if="${#strings.endsWith(evidence,'.pdf')}">
+											<img src="https://cdn4.iconfinder.com/data/icons/file-extensions-1/64/pdfs-128.png">
+											<div class="caption" align="center">
+												<p>
+													<a th:href="@{/evidents/} + ${evidence}" th:attr="download=${evidence}" style="width: 100%; word-wrap: break-word;"> <span
+														th:text="${evidence}"></span>
+													</a>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div th:if="${evidences == null}" class="form-group">
+								<label>Evidences:</label> <span>No evidence has been uploaded yet</span>
+							</div>
+
+							<form id="formProcessClaim" th:action="@{/eccoordinator/claim/process}" method="post">
+								<input id="claimId" name="claimId" type="hidden" th:value="${claim.id}" />
+								<div class="form-group group-decision">
+									<label>Decision:</label> <span style="display: none;" class="help-block">The decision cannot blank</span>
+									<th:block th:switch="${claim.status}">
+										<textarea th:case="1" class="ckeditor" id="contentEditor" th:text="${claim.decision}" name="decision" rows="10" cols="80" required></textarea>
+										<div th:case="0" class="thumbnail" th:utext="${claim.decision}"></div>
+									</th:block>
+								</div>
+								<div class="form-group" th:if="${claim.status==1}">
+									<button class="btn btn-primary" type="submit" value="Process"><i class="fa fa-gavel" aria-hidden="true"></i> Process</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+		<div th:replace="fragments/footer :: footer"></div>
+	</div>
+
+	<script>
             $('input[type="checkbox"], input[type="radio"]').iCheck({
                 checkboxClass: 'icheckbox_square-blue',
                 radioClass: 'iradio_square-blue',
             });
-            CKEDITOR.disableAutoInline = true;
-            var editor = CKEDITOR.inline('editable', {
-                removePlugins: 'toolbar'
-            });
-            CKEDITOR.replace("ckeditor");
+            
+           
+
+            $("#formProcessClaim").submit(function (e) {
+                valid=true;
+                editorLength=CKEDITOR.instances.contentEditor.document.getBody().getText().length;
+	            if (editorLength <= 1) {
+	                $(".group-decision").addClass("has-error")
+	                $(".group-decision").find(".help-block").show()
+	                valid = false;
+	            }
+	            if(!valid){
+	            	e.preventDefault()
+		        }
+            })
         </script>
-    </body>
+</body>
 
 </html>

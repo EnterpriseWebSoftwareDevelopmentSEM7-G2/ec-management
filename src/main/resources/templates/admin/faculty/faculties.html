@@ -14,11 +14,13 @@
     <p>
         <span class="m-error" th:if="${error}" th:text="${error}"></span>
     </p>
-    <div class="">
-        <table border="1" class="table-hover table-striped">
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
             <tr>
                 <th>ID</th>
                 <th>Title</th>
+                <th>Users</th>
+                <th>Assessments</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -29,6 +31,8 @@
                     </a>
                 </td>
                 <td th:text="${faculty.title}"></td>
+                <td th:text="${faculty.users.size()}"></td>
+                <td th:text="${faculty.assessments.size()}"></td>
                 <td><a class="btn btn-default" th:href="'/admin/faculty/edit/' + ${faculty.id}">edit</a></td>
                 <td>
                     <form method="post" th:action="'/admin/faculty/delete/' + ${faculty.id}">

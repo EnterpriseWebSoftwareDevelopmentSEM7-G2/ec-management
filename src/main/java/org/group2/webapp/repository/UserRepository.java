@@ -21,5 +21,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneWithAuthoritiesByUsername(String username);
 
     @Query("select u from User u join u.authorities au where name=?1")
-    List<User> findAllUserByAuthority(String role);
+    List<User> findAllUserByAuthority(String authoritiesConstants);
+    
+    @Query("select u from User u join u.authorities au where name=? and u.faculty.id=?")
+    List<User> findAllUserByAuthorityAndFacultyId(String authoritiesConstants, long facultyId);
 }

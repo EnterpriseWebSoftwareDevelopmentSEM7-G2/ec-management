@@ -9,7 +9,7 @@
 <div class="container">
     <h1>Add circumstance</h1>
     <form method="POST" action="#" th:action="@{/admin/circumstance/new}" th:object="${circumstance}">
-        <p><input type="text" th:field="*{title}" placeholder="Title" required="true" minlength="3"/>
+        <p><input class="m-large-input" type="text" th:field="*{title}" placeholder="Title" required="true" minlength="3"/>
             <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</span></p>
         <button class="btn btn-default" type="submit">Save</button>
         <a href="/admin/circumstance">

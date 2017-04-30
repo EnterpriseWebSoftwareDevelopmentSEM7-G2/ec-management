@@ -28,8 +28,12 @@ public interface ClaimRepository extends JpaRepository<Claim, Long> {
     @Query("select c from Claim c where WEEK(c.created_time) = ?1 and MONTH(c.created_time) = ?2 and YEAR(c.created_time) = ?3")
     List<Claim> findAllByThisWeek(int week,int month,int year);
 
-    
     @Query("select c from Claim c where c.user.id=?1")
     List<Claim> findAllByUserId(Long userId);
 
+    @Query("select c from Claim c where c.status=1")
+    List<Claim> findAllNotBeProcessed();
+    
+    @Query("select c from Claim c where c.canUploadMoreEvidence=true and c.status=1")
+    List<Claim> findAllNotBeOverUploadEvidence();
 }

@@ -10,7 +10,7 @@
 		<h1>Add user</h1>
 		<form method="POST" action="#" th:action="@{/admin/user/new}" th:object="${user}">
 			<p>
-				<input type="text" th:field="*{username}" placeholder="Username" required="true" minlength="3" /> <span th:if="${#fields.hasErrors('username')}"
+				<input type="text" th:field="*{username}" placeholder="Username" required="true" minlength="3" pattern="^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$" /> <span th:if="${#fields.hasErrors('username')}"
 					th:errors="*{username}">Username error</span>
 			</p>
 			<p>

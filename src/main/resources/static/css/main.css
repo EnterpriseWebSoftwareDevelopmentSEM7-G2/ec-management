@@ -1,0 +1,14 @@
+
+.m-chart {
+    width: 600px;
+    height: 300px;
+}
+
+.m-error {
+    color: red;
+}
+
+.m-large-input{
+    width: 50%;
+    height: 30px;
+}

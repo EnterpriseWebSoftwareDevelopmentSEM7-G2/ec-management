@@ -33,21 +33,28 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Claim 2017-04-05</h3>
                             <div class="pull-right">
-                                <th:block th:switch="${claim.status}">
-                                    <div th:case="0">
-                                        <span class="label label-success">Done</span>
-                                    </div>
-                                    <div th:case="1">
-                                        <span class="label label-warning">Pending</span>
-                                    </div>
-                                    <div th:case="2">
-                                        <span class="label label-danger">Disabled</span>
-                                    </div>
-                                </th:block>
+                               <th:block th:switch="${claim.status}">
+										<span th:case="0" class="label label-success">Done</span>
+									
+										<span th:case="1" class="label label-warning">Pending</span>
+									
+										<span th:case="2" class="label label-danger">Disabled</span>
+								</th:block>
+<!-- 									<span th:if="${claim.overDatelineProcess}" class="label label-danger">Over Deadline</span> -->
+									<span th:if="${!claim.canUploadMoreEvidence}" class="label label-danger">Cannot upload more evidences</span>
                             </div>
                         </div>
                         <div class="box-body">
                             <form th:action="@{/student/claim/update}" id="update-form" method="post" class="form-horizontal" enctype="multipart/form-data">
+                                 <div class="form-group col-lg-12">
+                                    <label>Student name:</label> <span th:text="${claim.user.firstName}"></span> <span th:text="${claim.user.lastName}"></span>
+                                </div>
+                                 <div class="form-group col-lg-12">
+                                    <label>Faculty:</label> <span th:text="${claim.user.faculty.title}">1111</span>
+                                </div>
+                                 <div class="form-group col-lg-12">
+                                    <label>Email:</label> <span th:text="${claim.user.email}">1111</span>
+                                </div>
                                 <div class="form-group col-lg-12">
                                     <label>Claim ID#:</label> <span th:text="${claim.id}">1111</span>
                                 </div>
@@ -55,15 +62,12 @@
                                 <div class="form-group col-lg-12">
                                     <label>Claim for: </label> <span th:text="${claim.item.title}">Title</span>
                                 </div>
+                                
                                 <div class="form-group col-lg-12">
-                                    <label>Content</label>
-                                    <textarea class="form-control ckeditor" style="resize: vertical;" th:text="${claim.content}" name="decision" rows="10" cols="80"
-                                              readonly="readonly"></textarea>
-                                </div>
-                                <div th:if="${claim.decision != null}" class="form-group col-lg-12">
-                                    <label>Decision</label>
-                                    <textarea class="form-control ckeditor" style="resize: vertical;" th:text="${claim.decision}" name="decision" rows="10" cols="80"
-                                              readonly="readonly"></textarea>
+                                    <label>Content: </label>
+                                     <div class="thumbnail" th:utext="${claim.content}">
+                                    
+                                    </div>
                                 </div>
                                 <div th:if="${evidences != null}" class="form-group col-lg-12">
                                     <label>Evidences:</label>
@@ -115,12 +119,24 @@
                                     <span>No evidence has been uploaded yet</span>
                                 </div>
                                 
-                                <div class="form-group col-lg-12">
-                                    <label>Upload more evidents: </label> <input type="hidden" name="id" th:value="${claim.id}" /> <input type="file" name="evidenceFiles"
-                                                                                                                                          multiple="true" />
-                                </div>
-                                <div class="form-group col-lg-12">
-                                    <input class="btn btn-primary" type="submit" value="Upload" />
+                                <th:block th:if="${claim.decision==null&&claim.canUploadMoreEvidence}">
+	                                <div class="form-group col-lg-12">
+	                                    <label>Upload more evidences: </label> <input type="hidden" name="id" th:value="${claim.id}" /> <input type="file" name="evidenceFiles"
+	                                                                                                                                     accept=".jpg, .png, .pdf, .doc"  multiple="true" />
+	                                </div>
+	                                <div class="form-group col-lg-12">
+	                                    <button class="btn btn-primary" type="submit">
+	                                     <i class="fa fa-gavel" aria-hidden="true"></i>
+	                                     Upload
+	                                    </button>
+	                                </div>	
+                                </th:block>
+                                
+                                <div class="form-group col-lg-12" th:if="${decision != null}">
+                                    <label>Decision: </label>
+                                    <div class="thumbnail" th:utext="${claim.decision}">
+                                    
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -141,8 +157,6 @@
                 radioClass: 'iradio_square-blue',
             });
             CKEDITOR.replace("ckeditor");
-
-
         </script>
     </body>
 

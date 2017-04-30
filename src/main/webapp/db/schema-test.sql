@@ -56,6 +56,14 @@ CREATE TABLE claim (
   processed_time DATETIME,
   closed_date    DATETIME,
   status         INT,
+  seen  BOOLEAN,
+  changed_times INT,
+  over_dateline_process BOOLEAN,
+  can_upload_more_evidence BOOLEAN,
+  deadline_upload_evidence DATETIME,
+  deadline_process DATETIME,
+  last_remind_process DATETIME,
+  last_remind_upload_evidence DATETIME,
   PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES `user` (id)
 );
@@ -129,15 +137,15 @@ INSERT INTO user_authority (user_id, authority_name) VALUES
   (5, 'ROLE_ADMIN'), (5, 'ROLE_USER'), (5, 'ROLE_STUDENT'), (5, 'ROLE_MANAGER'), (5, 'ROLE_COORDINATOR');
 
 -- INSERT SAMPLE DATA FOR CLAIMS --
-INSERT INTO claim (evidence, content, created_time, processed_time, status, user_id, closed_date) VALUES
-  ('Evidence1', 'Content1', NOW(), NOW(), 1, 2,NOW()),
-  ('Evidence2', 'Content2', NOW(), NULL, 1, 2,'2017-05-05'),
-  ('Evidence3', 'Content3', '2016-05-05', NULL , 1, 2,NOW()),
-  ('Evidence4', 'Content4', NOW(), NOW(), 1, 6,'2017-04-28'),
-  ('Evidence5', 'Content5', NOW(), NULL, 1, 6,'2017-04-30'),
-  ('Evidence6', 'Content6','2015-05-05', NOW(), 1, 7,'2017-04-06'),
-  ('Evidence7', 'Content7', '2015-05-05', NOW(), 1, 7,'2017-06-20'),
-  ('Evidence8', 'Content8', NOW(),NULL, 1, 8,'2017-04-01');
+INSERT INTO claim (evidence, content, created_time, processed_time, status, user_id, closed_date,changed_times) VALUES
+  ('Evidence1', 'Content1', NOW(), NOW(), 1, 2,NOW(),0),
+  ('Evidence2', 'Content2', NOW(), NULL, 1, 2,'2017-05-05',0),
+  ('Evidence3', 'Content3', '2016-05-05', NULL , 1, 2,NOW(),0),
+  ('Evidence4', 'Content4', NOW(), NOW(), 1, 6,'2017-04-28',0),
+  ('Evidence5', 'Content5', NOW(), NULL, 1, 6,'2017-04-30',0),
+  ('Evidence6', 'Content6','2015-05-05', NOW(), 1, 7,'2017-04-06',0),
+  ('Evidence7', 'Content7', '2015-05-05', NOW(), 1, 7,'2017-06-20',0),
+  ('Evidence8', 'Content8', NOW(),NULL, 1, 8,'2017-04-01',0);
 
 
 INSERT INTO circumstance (title)

@@ -21,10 +21,10 @@
   	- Admin role: admin - 1234
 
 ## Project UML
-![alt tag](https://firebasestorage.googleapis.com/v0/b/socialapp-cc534.appspot.com/o/images%2Fuml-final2.png?alt=media&token=1537fcc3-80ad-43e1-a142-21400ecd2082)
+![alt tag](https://firebasestorage.googleapis.com/v0/b/socialapp-cc534.appspot.com/o/images%2Ffinal_uml.png?alt=media&token=d86cd4f5-b270-477f-b476-623ba6434904)
 
 ## Project ERD
-![alt tag](https://firebasestorage.googleapis.com/v0/b/socialapp-cc534.appspot.com/o/images%2Ferd-final.png?alt=media&token=a8e6cd1c-faf1-4a1c-8c47-7bddeaf50cd3)
+![alt tag](https://firebasestorage.googleapis.com/v0/b/socialapp-cc534.appspot.com/o/images%2Ffinal_erd.png?alt=media&token=c2fa3e2e-14a0-4b81-9d4a-d3a5f51142c2)
 
 ## Project setup
 1. Git clone

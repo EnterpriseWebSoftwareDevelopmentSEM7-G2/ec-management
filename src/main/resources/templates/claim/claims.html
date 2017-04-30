@@ -1,117 +1,132 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
-        <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.min.css" th:href="@{/lib/bootstrap/css/bootstrap.min.css}" />
-        <!-- <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap-theme.min.css" th:href="@{/lib/bootstrap/css/bootstrap-theme.min.css}" /> -->
-        <!-- <link rel="stylesheet" href="../static/css/core.css" th:href="@{/css/core.css}" /> -->
-        <link rel="stylesheet" href="../static/lib/adminlte/css/AdminLTE.min.css" th:href="@{/lib/adminlte/css/AdminLTE.min.css}" />
-        <link rel="stylesheet" href="../static/lib/adminlte/css/skins/skin-blue.css" th:href="@{/lib/adminlte/css/skins/_all-skins.min.css}" />
-        <link rel="stylesheet" href="../static/lib/iCheck/all.css" th:href="@{/lib/iCheck/all.css}" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-
-        <script src="../static/lib/jquery/jquery.js" th:src="@{/lib/jquery/jquery.js}"></script>
-        <script src="../static/lib/bootstrap/js/bootstrap.min.js" th:src="@{/lib/bootstrap/js/bootstrap.min.js}"></script>
-        <script src="../static/lib/adminlte/js/app.min.js" th:src="@{/lib/adminlte/js/app.min.js}"></script>
-        <script src="../../static/lib/iCheck/icheck.min.js" th:src="@{/lib/iCheck/icheck.min.js}"></script>
-        <title>Claims</title>
-    </head>
+<head>
+<th:block th:replace="fragments/bundle :: bundle"></th:block>
+<title>Claims</title>
+</head>
 
 
-    <body class="hold-transition skin-green layout-top-nav">
-        <div class="wrapper">
-            <div th:replace="fragments/header :: header"></div>
-            <div class="content-wrapper">
-                <div class="container">
-                    <section class="content-header">
-                        <h1>Your claims</h1>
-                    </section>
-                    <section class="content">
-                        <div th:if="${claimAdded != null}" class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <h4>
-                                <i class="icon fa fa-check"></i> Claim added successfully!
-                            </h4>
-                            Your claim will be processed as soon as possible.
-                        </div>
-                        <div th:if="${claimProcessed != null}" class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <h4>
-                                <i class="icon fa fa-check"></i> Claim saved!
-                            </h4>
-                            A new email will be sent to claim's student.
-                        </div>
-                        <div th:if="${updatedEvidence != null}" class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <h4>
-                                <i class="icon fa fa-check"></i> Your evidences have been uploaded successfully!
-                            </h4>
-                            A new email will be sent to claim's student.
-                        </div>
+<body class="hold-transition skin-green layout-top-nav">
+	<div class="wrapper">
+		<div th:replace="fragments/header :: header"></div>
+		<div class="content-wrapper">
+			<div class="container">
+				<section class="content-header">
+					<h1>Your claims</h1>
+				</section>
+				<section class="content">
+					<div th:if="${claimAdded != null}" class="alert alert-success alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<h4>
+							<i class="icon fa fa-check"></i> Claim added successfully!
+						</h4>
+						Your claim will be processed as soon as possible.
+					</div>
+					<div th:if="${claimProcessed != null}" class="alert alert-success alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<h4>
+							<i class="icon fa fa-check"></i> Claim saved!
+						</h4>
+						A new email will be sent to claim's student.
+					</div>
+					<div th:if="${updatedEvidence != null}" class="alert alert-success alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<h4>
+							<i class="icon fa fa-check"></i> Your evidences have been uploaded successfully!
+						</h4>
+						A new email will be sent to claim's student.
+					</div>
 
-                        <div class="box box-primary">
-                            <div class="box-header">
+					<div class="box box-primary">
+						<div class="box-header">
 
-                                <h3 class="box-title">
-                                    Total claims [<span th:text="${claims.size()}"></span>]
-                                </h3>
+<!-- 							<h3 class="box-title"> -->
+<!-- 								Total claims [<span th:text="${claims.size()}"></span>] -->
+<!-- 							</h3> -->
 
-                                <div class="box-tools pull-right">
-                                    <div class="has-feedback">
-                                        <input type="text" class="form-control input-sm" placeholder="Search claim"> <span
-                                            class="glyphicon glyphicon-search form-control-feedback"></span>
-                                    </div>
-                                </div>
-                                <!-- /.box-tools -->
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body no-padding">
-                                <table class="table table-hover table-striped">
-                                    <tbody>
-                                        <tr style="cursor: pointer;" th:each="cl : ${claims}" class="claimRow">
+							<!-- 							<div class="box-tools pull-right"> -->
+							<!-- 								<div class="has-feedback"> -->
+							<!-- 									<input type="text" class="form-control input-sm" placeholder="Search claim"> <span -->
+							<!-- 										class="glyphicon glyphicon-search form-control-feedback"></span> -->
+							<!-- 								</div> -->
+							<!-- 							</div> -->
+							<!-- /.box-tools -->
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body">
+							<table id="tblClaim" class="table table-hover table-striped">
+								<thead>
+									<tr>
+										<th>Status</th>
+										<th>Submit date</th>
+										<th>Assessment</th>
+										<th>Item</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr style="cursor: pointer;" th:each="cl : ${claims}" class="claimRow">
+						
+										<input type="hidden" class="claimId" value="Submit" th:value="${cl.id}" />
+										<!-- 								<td><input type="checkbox"></td> -->
 
-                                    <input type="hidden" class="claimId" value="Submit" th:value="${cl.id}" />
-                                    <!-- 								<td><input type="checkbox"></td> -->
+										<td class="mailbox-date"><th:block th:switch="${cl.status}">
+													<span th:case="0" class="label label-success">Done</span>
+													<span th:case="1" class="label label-warning">Pending</span>
+													<span th:case="2" class="label label-danger">Disabled</span>
+											</th:block>
+											<span sec:authorize="hasRole('ROLE_COORDINATOR')" th:if="${cl.overDatelineProcess}" class="label label-danger">Over Process Deadline</span>
+											<span sec:authorize="hasRole('ROLE_STUDENT')" th:if="${!cl.canUploadMoreEvidence}" class="label label-danger">Cannot upload more evidences</span>
+											</td>
 
-                                    <td class="mailbox-date"><th:block th:switch="${cl.status}">
-                                        <div th:case="0">
-                                            <span class="label label-success">Done</span>
-                                        </div>
-                                        <div th:case="1">
-                                            <span class="label label-warning">Pending</span>
-                                        </div>
-                                        <div th:case="2">
-                                            <span class="label label-danger">Disabled</span>
-                                        </div>
-                                    </th:block></td>
-                                    <td><b>Start [<span th:text="${#dates.format(cl.created_time, 'dd-MMM-yyyy')}"></span>]
-                                        </b></td>
-                                    <td class="mailbox-name" th:text="${cl.item.assessment.title}"></td>
-                                    <td class="mailbox-subject" th:text="${cl.item.title}"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                                    <td class="mailbox-attachment"></td>
-                                    <td class="mailbox-date" th:text="${cl.created_time}">5 mins ago</td>
+										<td></th:block> <span th:text="${#dates.format(cl.created_time, 'MM-dd-yyyy HH:mm')}"></span></td>
+										<td class="mailbox-name" th:text="${cl.item.assessment.title}"></td>
+										<td class="mailbox-subject" th:text="${cl.item.title}"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
+										<!-- 										<td class="mailbox-attachment"></td> -->
 
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <!-- /.table -->
-                            </div>
-                            <div class="box-footer with-border"></div>
-                        </div>
-                        <!-- /. box -->
+									</tr>
+								</tbody>
+								<tfoot></tfoot>
+							</table>
+							<!-- /.table -->
+						</div>
+						<div class="box-footer with-border"></div>
+					</div>
+					<!-- /. box -->
 
-                    </section>
-                </div>
-                <!-- /.content-wrapper -->
-            </div>
-        </div>
-        <!-- /.<div class="wrapper"> -->
+				</section>
+			</div>
+			<!-- /.content-wrapper -->
+		</div>
+	</div>
+	<!-- /.<div class="wrapper"> -->
 
-        <div th:replace="fragments/footer :: footer"></div>
+	<div th:replace="fragments/footer :: footer"></div>
 
-        <script>
-            $(".alert-success").fadeTo(2000, 500).slideUp(500);
+	<script>
+        $(function () {
+            $("#tblClaim").DataTable({
+              "paging": true,
+              "lengthChange": true,
+              "searching": true,
+              "ordering": true,
+              "info": true,
+              "autoWidth": true,
+              "oLanguage": {
+                  "sSearch": "Filter claims:",
+                  "sLengthMenu": 'Display <select class="form-control">'+
+                      '<option value="5">5</option>'+
+                      '<option value="10">10</option>'+
+                      '<option value="20">20</option>'+
+                      '<option value="30">30</option>'+
+                      '<option value="40">40</option>'+
+                      '<option value="-1">All</option>'+
+                      '</select> claims',
+                  "sInfo": "<span>Got a total of _TOTAL_ claims to show (_START_ to _END_)</span>"
+                }
+            });
+          });
+        
+            $(".alert-success").fadeTo(5000, 500).slideUp(500);
             $('.mailbox-messages input[type="checkbox"]').iCheck({
                 checkboxClass: 'icheckbox_square-blue',
                 radioClass: 'iradio_square-blue',
@@ -137,6 +152,7 @@
             });
 
             $(".claimRow").on("click", function () {
+            	
                 claimId = $(this).find(".claimId").val()
                 pathname = window.location.pathname
                 if (pathname.includes("eccoordinator"))
@@ -154,7 +170,7 @@
             })
         </script>
 
-    </body>
+</body>
 
 
 </html>

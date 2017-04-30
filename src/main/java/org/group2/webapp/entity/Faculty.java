@@ -6,6 +6,7 @@
 package org.group2.webapp.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -44,11 +45,11 @@ public class Faculty implements Serializable {
 
 	@OneToMany(mappedBy = "faculty")
 	@JsonIgnore
-	private Set<User> users;
+	private Set<User> users = new HashSet<>();
 
 	@OneToMany(mappedBy = "faculty")
 	@JsonIgnore
-	private Set<Assessment> courses;
+	private Set<Assessment> assessments = new HashSet<>();
 
 	public Faculty() {
 	}
@@ -58,12 +59,12 @@ public class Faculty implements Serializable {
 		this.title = title;
 	}
 
-	public Set<Assessment> getCourses() {
-		return courses;
+	public Set<Assessment> getAssessments() {
+		return assessments;
 	}
 
-	public void setCourses(Set<Assessment> courses) {
-		this.courses = courses;
+	public void setAssessments(Set<Assessment> assessments) {
+		this.assessments = assessments;
 	}
 
 	public Long getId() {

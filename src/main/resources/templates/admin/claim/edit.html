@@ -10,8 +10,8 @@
     <h1>Edit claim</h1>
     <form method="POST" action="#" th:action="@{/admin/claim/edit}" th:object="${claim}">
         <p><input type="text" th:field="*{id}" hidden="true"/></p>
-        <p><input type="text" th:field="*{evidence}" placeholder="First name" required="true" minlength="5"/></p>
-        <p><input type="text" th:field="*{content}" placeholder="Last name" required="true" minlength="5"/></p>
+        <p><input type="text" th:field="*{evidence}" placeholder="Evidence" required="true" minlength="5"/></p>
+        <p><input type="text" th:field="*{content}" placeholder="Content" required="true" minlength="5"/></p>
         <p><input type="number" th:field="*{status}" placeholder="Status" required="true" min="1"/></p>
         <p>Set dateline: <input type="date" th:field="*{closedDate}" placeholder="Closed Date" name="closedDate" required="true"/></p>
         <!--<td th:if="${#fields.hasErrors('closedDate')}" th:errors="*{closedDate}">closedDate Error</td>-->

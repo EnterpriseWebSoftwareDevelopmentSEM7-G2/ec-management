@@ -11,5 +11,5 @@ package org.group2.webapp.constraints;
 public class ClaimStatusContraints {
 	public static final int DONE = 0;
 	public static final int PENDING = 1;
-	public static final int DISABLE = 2;
+	public static final int DISABLE = 2; 
 }

@@ -19,6 +19,7 @@
             <tr>
                 <th>ID</th>
                 <th>Title</th>
+                <th>Claims</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -29,6 +30,7 @@
                     </a>
                 </td>
                 <td th:text="${circumstance.title}"></td>
+                <td th:text="${circumstance.claims.size()}"></td>
                 <td><a class="btn btn-default" th:href="'/admin/circumstance/edit/' + ${circumstance.id}">edit</a></td>
                 <td>
                     <form method="post" th:action="'/admin/circumstance/delete/' + ${circumstance.id}">

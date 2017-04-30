@@ -11,10 +11,10 @@
 		<h1>Edit circumstance</h1>
 		<form method="POST" action="#" th:action="@{/admin/circumstance/edit}" th:object="${circumstance}">
 			<p>
-				<input type="text" th:field="*{id}" hidden="true" />
+				<input  type="text" th:field="*{id}" hidden="true" />
 			</p>
 			<p>
-				<input type="text" th:field="*{title}" placeholder="First name" required="true" minlength="5" />
+				<input class="m-large-input" type="text" th:field="*{title}" placeholder="First name" required="true" minlength="5" />
 			</p>
 			<button class="btn btn-default" type="submit">Save</button>
 			<a href="/admin/circumstance">

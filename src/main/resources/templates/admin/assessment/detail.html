@@ -13,6 +13,10 @@
     <h2>Assessment: <span th:text="${assessment.code}"></span></h2>
     <p>Title: <span th:text="${assessment.title}"></span></p>
     <p>Faculty: <span th:text="${assessment.faculty.title}"></span></p>
+    <p>Items: </p>
+    <ul>
+        <li  th:each="item : ${assessment.items}" th:text="${item.crn + ' - ' + item.title}"></li>
+    </ul>
 </div>
 </body>
 </html>

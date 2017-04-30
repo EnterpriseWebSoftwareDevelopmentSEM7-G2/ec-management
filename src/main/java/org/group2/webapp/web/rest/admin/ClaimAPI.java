@@ -59,9 +59,9 @@ public class ClaimAPI {
 
 
     @GetMapping("/claims")
-    public List<Claim> getAllClaims() {
+    public ResponseEntity<List<Claim>> getAllClaims() {
         log.debug("REST request to get all Claims");
-        return claimService.findAll();
+        return ResponseEntity.ok(claimService.findAll());
     }
 
     @GetMapping("/claims/year")
