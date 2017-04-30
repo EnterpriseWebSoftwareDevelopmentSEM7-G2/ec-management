@@ -43,11 +43,10 @@ public class MailSender {
 	private static EmailPattern informStudentClaimProcessed = new EmailPattern();
 	private static EmailPattern informStudentNearEvidence = new EmailPattern();
 	private static EmailPattern informStudentOverEvidence = new EmailPattern();
-	
+
 	private static EmailPattern informCoordinatorNewClaim = new EmailPattern();
 	private static EmailPattern informCoordinatorNearDeadline = new EmailPattern();
 	private static EmailPattern informCoordinatorOverDeadline = new EmailPattern();
-	
 
 	private static Boolean ready = false;
 	static {
@@ -55,43 +54,42 @@ public class MailSender {
 			informStudentClaimProcessed.loadFromProperties("data/informStudentClaimProcessed.properties");
 			informStudentNearEvidence.loadFromProperties("data/informStudentNearEvidence.properties");
 			informStudentOverEvidence.loadFromProperties("data/informStudentOverEvidence.properties");
-			
+
 			informCoordinatorNewClaim.loadFromProperties("data/informCoordinatorNewClaim.properties");
 			informCoordinatorNearDeadline.loadFromProperties("data/informCoordinatorNearDeadline.properties");
 			informCoordinatorOverDeadline.loadFromProperties("data/informCoordinatorOverDeadline.properties");
 			ready = true;
 		}
 	}
-	
-	public static void a(){}
+
+	public static void a() {
+	}
+
 	public static void main(String[] args) {
 		a();
-		System.out.println(informStudentNearEvidence);
+		MailUtils.mail("anhndgc00893@fpt.edu.vn", "kiem tra email", "noi dung spam");
 	}
 
 	private static String replaceVal(String str, Claim claim) {
 		LocalDateTime submitTime = LocalDateTime.ofInstant(claim.getCreated_time().toInstant(), ZoneId.systemDefault());
 		LocalDateTime now = LocalDateTime.now();
-//		long soNgayQuaHan = submitTime.plusDays(ClaimChecker).until(now, ChronoUnit.DAYS);
-//		str = str.replaceAll("_NUMBER_DAY_FROM_SUBMIT", String.valueOf(soNgayQuaHan));
-		
-		
+
 		str = str.replaceAll("_ITEM_TITLE", claim.getItem().getTitle());
 		str = str.replaceAll("_ASSESSMENT_TITLE", claim.getItem().getAssessment().getTitle());
-		
+
 		str = str.replaceAll("_CLAIM_COORDINATOR_LINK",
 				"http://localhost:8080/eccoordinator/claim/process?id=" + claim.getId());
-		LocalDateTime processDeadline=submitTime.plusDays(ClaimChecker.SO_NGAY_HET_HAN_XU_LY);
-		long processDateRemain=now.until(processDeadline, ChronoUnit.DAYS);
-		long daysOverDeadline=processDeadline.until(now, ChronoUnit.DAYS);
+		LocalDateTime processDeadline = submitTime.plusDays(ClaimChecker.SO_NGAY_HET_HAN_XU_LY);
+		long processDateRemain = now.until(processDeadline, ChronoUnit.DAYS) + 1;
+		long daysOverDeadline = processDeadline.until(now, ChronoUnit.DAYS);
 		str = str.replaceAll("_PROCESS_DEADLINE", processDeadline.toString());
 		str = str.replaceAll("_PROCESS_DATE_REMAIN", String.valueOf(processDateRemain));
 		str = str.replaceAll("_DAYS_OVER_DEADLINE", String.valueOf(daysOverDeadline));
-		
+
 		str = str.replaceAll("_CLAIM_STUDENT_LINK",
 				"http://localhost:8080/student/claim/detail?id=" + claim.getId());
-		LocalDateTime evidenceDeadline=submitTime.plusDays(ClaimChecker.SO_NGAY_HET_HAN_UPLOAD_EVIDENCE);
-		long uploadEvidenceRemain=now.until(evidenceDeadline, ChronoUnit.DAYS);
+		LocalDateTime evidenceDeadline = submitTime.plusDays(ClaimChecker.SO_NGAY_HET_HAN_UPLOAD_EVIDENCE);
+		long uploadEvidenceRemain = now.until(evidenceDeadline, ChronoUnit.DAYS) + 1;
 		str = str.replaceAll("_UPLOAD_EVIDENCE_DEADLINE", evidenceDeadline.toString());
 		str = str.replaceAll("_UPLOAD_EVIDENCE_REMAIN", String.valueOf(uploadEvidenceRemain));
 		str = str.replaceAll("_STUDENT_NAME", claim.getUser().getFirstName());
@@ -110,8 +108,8 @@ public class MailSender {
 		for (User user : users) {
 			if (user.getFaculty().getId() == claim.getUser().getFaculty().getId()) {
 				MailUtils.mail(user.getEmail(), email.getSubject(), email.getContent());
-				logger.debug("[Email] send email for coordinator name=" + user.getFirstName() + ", email="
-						+ user.getEmail());
+				logger.debug("informCoordinatorNewClaim: " + user.getEmail() + "\n" + email.getSubject() + "\n"
+						+ email.getContent());
 			}
 		}
 	}
@@ -120,7 +118,8 @@ public class MailSender {
 		EmailPattern email = passParamSubject(informCoordinatorOverDeadline, claim);
 		for (User coordinator : coordinators) {
 			MailUtils.mail(coordinator.getEmail(), email.getSubject(), email.getContent());
-			logger.debug("Claim da bi qua han. Send mail cho: " + coordinator.getEmail());
+			logger.debug("informCoordinatorClaimDeadline: " + coordinator.getEmail() + "\n" + email.getSubject() + "\n"
+					+ email.getContent());
 		}
 	}
 
@@ -128,30 +127,41 @@ public class MailSender {
 		EmailPattern email = passParamSubject(informCoordinatorNearDeadline, claim);
 		for (User coordinator : coordinators) {
 			MailUtils.mail(coordinator.getEmail(), email.getSubject(), email.getContent());
-			logger.debug("Claim chuan bi het han. Send mail cho: " + coordinator.getEmail());
+			logger.debug(
+					"informCoordinatorClaimNearDeadline: " + coordinator.getEmail() + "\n" + email.getSubject() + "\n"
+							+ email.getContent());
 		}
 	}
-	
+
 	public static void informStudentNearDeadlineEvidence(Claim claim) {
 		EmailPattern email = passParamSubject(informStudentNearEvidence, claim);
 		System.out.println(email);
 		MailUtils.mail(claim.getUser().getEmail(), email.getSubject(), email.getContent());
+		logger.debug(
+				"informStudentNearDeadlineEvidence: " + claim.getUser().getEmail() + "\n" + email.getSubject() + "\n"
+						+ email.getContent());
 	}
-	
+
 	public static void informStudentOverDeadlineEvidence(Claim claim) {
 		EmailPattern email = passParamSubject(informStudentOverEvidence, claim);
 		System.out.println(email);
 		MailUtils.mail(claim.getUser().getEmail(), email.getSubject(), email.getContent());
+		logger.debug(
+				"informStudentOverDeadlineEvidence: " + claim.getUser().getEmail() + "\n" + email.getSubject() + "\n"
+						+ email.getContent());
 	}
 
 	public static void informStudentThatTheClaimProcessed(Claim claim) {
 		User user = claim.getUser();
 		EmailPattern email = passParamSubject(informStudentClaimProcessed, claim);
 		MailUtils.mail(user.getEmail(), email.getSubject(), email.getContent());
+		logger.debug("informStudentThatTheClaimProcessed: " + user.getEmail() + "\n" + email.getSubject() + "\n"
+				+ email.getContent());
 	}
 }
 
 class MailUtils {
+	private static final Logger logger = Logger.getLogger(MailUtils.class);
 	private static Properties config = null;
 	private static Session mailSs;
 
@@ -162,6 +172,7 @@ class MailUtils {
 			config.put("mail.smtp.starttls.enable", "true");
 			config.put("mail.smtp.host", "smtp.gmail.com");
 			config.put("mail.smtp.port", "587");
+			config.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
 			mailSs = Session.getInstance(config, new OurAuthentication());
 		}
@@ -178,6 +189,7 @@ class MailUtils {
 					msg.setSubject(subject);
 					msg.setContent(content, "text/html");
 					Transport.send(msg);
+					logger.info("Sent a mail to:" + to);
 				} catch (MessagingException e) {
 					e.printStackTrace();
 				}
@@ -189,7 +201,7 @@ class MailUtils {
 
 class OurAuthentication extends Authenticator {
 	private static final String USERNAME = "systemec2017@gmail.com";
-	private static final String PASSWORD = "ec123456789";
+	private static final String PASSWORD = "ec12345678";
 
 	@Override
 	protected PasswordAuthentication getPasswordAuthentication() {

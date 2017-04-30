@@ -85,13 +85,13 @@ public class Claim implements Serializable {
 	@Column(name = "can_upload_more_evidence")
 	private Boolean canUploadMoreEvidence = true;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="deadline_upload_evidence")
-	private Date deadlineUploadEvidence;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="deadline_process")
-	private Date deadlineProcess;
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@Column(name="deadline_upload_evidence")
+//	private Date deadlineUploadEvidence;
+//
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@Column(name="deadline_process")
+//	private Date deadlineProcess;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "last_remind_process")
@@ -151,22 +151,6 @@ public class Claim implements Serializable {
 //		return 
 //	}
 
-
-	public Date getDeadlineUploadEvidence() {
-		return deadlineUploadEvidence;
-	}
-
-	public void setDeadlineUploadEvidence(Date deadlineUploadEvidence) {
-		this.deadlineUploadEvidence = deadlineUploadEvidence;
-	}
-
-	public Date getDeadlineProcess() {
-		return deadlineProcess;
-	}
-
-	public void setDeadlineProcess(Date deadlineProcess) {
-		this.deadlineProcess = deadlineProcess;
-	}
 
 	public void addCircumstance(Circumstance circumstance) {
 		this.circumstances.add(circumstance);
@@ -282,13 +266,6 @@ public class Claim implements Serializable {
 		return this.processed_time != null;
 	}
 
-	@Override
-	public String toString() {
-		return "Claim [id=" + id + ", evidence=" + evidence + ", content=" + content + ", decision=" + decision
-				+ ", created_time=" + created_time + ", processed_time=" + processed_time + ", closedDate=" + closedDate
-				+ ", status=" + status + ", user=" + user + ", item=" + item + ", evidences=" + evidences
-				+ ", circumstances=" + circumstances + "]";
-	}
 
 	public String getDecision() {
 		return decision;
@@ -365,5 +342,15 @@ public class Claim implements Serializable {
 
 	public void setLastRemindUploadDate(Date lastRemindUploadDate) {
 		this.lastRemindUploadDate = lastRemindUploadDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Claim [id=" + id + ", evidence=" + evidence + ", content=" + content + ", decision=" + decision
+				+ ", created_time=" + created_time + ", processed_time=" + processed_time + ", closedDate=" + closedDate
+				+ ", status=" + status + ", seen=" + seen + ", changedTimes=" + changedTimes + ", overDatelineProcess="
+				+ overDatelineProcess + ", canUploadMoreEvidence=" + canUploadMoreEvidence + ", lastDateRemind="
+				+ lastDateRemind + ", lastRemindUploadDate=" + lastRemindUploadDate + ", user=" + user + ", item="
+				+ item + ", evidences=" + evidences + ", circumstances=" + circumstances + "]";
 	}
 }

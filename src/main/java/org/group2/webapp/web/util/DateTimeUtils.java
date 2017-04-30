@@ -21,6 +21,6 @@ public class DateTimeUtils {
 	}
 
 	public static Date localDateTimeToDate(LocalDateTime localDateTime) {
-		return Date.from(localDateTime.toInstant(ZoneOffset.UTC));
+		return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 	}
 }

@@ -1,0 +1,121 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 32744 bytes for ChunkPool::allocate
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (allocation.cpp:273), pid=6388, tid=0x00000000000012d4
+#
+# JRE version:  (8.0_111-b14) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.111-b14 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000001fe4000):  JavaThread "Unknown thread" [_thread_in_vm, id=4820, stack(0x0000000001e90000,0x0000000001f90000)]
+
+Stack: [0x0000000001e90000,0x0000000001f90000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x0000000001fe4000 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=4820, stack(0x0000000001e90000,0x0000000001f90000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff661e60000 - 0x00007ff661e97000 	C:\Program Files\Java\jdk1.8.0_111\bin\javaw.exe
+0x00007fff4c6e0000 - 0x00007fff4c88d000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007fff4a7d0000 - 0x00007fff4a90e000 	C:\Windows\system32\KERNEL32.DLL
+0x00007fff49950000 - 0x00007fff49a65000 	C:\Windows\system32\KERNELBASE.dll
+0x00007fff47fe0000 - 0x00007fff4806e000 	C:\Windows\system32\apphelp.dll
+0x00007fff41e90000 - 0x00007fff41ee3000 	C:\Windows\AppPatch\AppPatch64\AcGenral.DLL
+0x00007fff4a720000 - 0x00007fff4a7ca000 	C:\Windows\system32\msvcrt.dll
+0x00007fff498d0000 - 0x00007fff498fe000 	C:\Windows\system32\SspiCli.dll
+0x00007fff49d60000 - 0x00007fff49db4000 	C:\Windows\system32\SHLWAPI.dll
+0x00007fff4c4f0000 - 0x00007fff4c667000 	C:\Windows\system32\USER32.dll
+0x00007fff4a580000 - 0x00007fff4a714000 	C:\Windows\system32\ole32.dll
+0x00007fff4a950000 - 0x00007fff4be78000 	C:\Windows\system32\SHELL32.dll
+0x00007fff48e50000 - 0x00007fff48e71000 	C:\Windows\SYSTEM32\USERENV.dll
+0x00007fff4bf00000 - 0x00007fff4bfaa000 	C:\Windows\system32\ADVAPI32.dll
+0x00007fff46e80000 - 0x00007fff46e9e000 	C:\Windows\SYSTEM32\MPR.dll
+0x00007fff4c070000 - 0x00007fff4c1b0000 	C:\Windows\system32\RPCRT4.dll
+0x00007fff49fe0000 - 0x00007fff4a039000 	C:\Windows\SYSTEM32\sechost.dll
+0x00007fff4a300000 - 0x00007fff4a511000 	C:\Windows\SYSTEM32\combase.dll
+0x00007fff49e80000 - 0x00007fff49fcf000 	C:\Windows\system32\GDI32.dll
+0x00007fff49800000 - 0x00007fff49815000 	C:\Windows\SYSTEM32\profapi.dll
+0x00007fff47640000 - 0x00007fff476f2000 	C:\Windows\SYSTEM32\SHCORE.dll
+0x00007fff4a910000 - 0x00007fff4a946000 	C:\Windows\system32\IMM32.DLL
+0x00007fff4c1c0000 - 0x00007fff4c312000 	C:\Windows\system32\MSCTF.dll
+0x00007fff47100000 - 0x00007fff4737b000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.9600.18006_none_623f33d3ecbe86e8\COMCTL32.dll
+0x0000000072390000 - 0x0000000072462000 	C:\Program Files\Java\jdk1.8.0_111\jre\bin\msvcr100.dll
+0x0000000071af0000 - 0x000000007238a000 	C:\Program Files\Java\jdk1.8.0_111\jre\bin\server\jvm.dll
+0x00007fff429b0000 - 0x00007fff429b9000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007fff42690000 - 0x00007fff426b2000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007fff429a0000 - 0x00007fff429aa000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007fff4c1b0000 - 0x00007fff4c1b7000 	C:\Windows\system32\PSAPI.DLL
+0x00007fff4be80000 - 0x00007fff4beda000 	C:\Windows\system32\WS2_32.dll
+0x00007fff42660000 - 0x00007fff4268a000 	C:\Windows\SYSTEM32\WINMMBASE.dll
+0x00007fff4c4e0000 - 0x00007fff4c4e9000 	C:\Windows\system32\NSI.dll
+0x00007fff49900000 - 0x00007fff4994f000 	C:\Windows\SYSTEM32\cfgmgr32.dll
+0x00007fff48620000 - 0x00007fff48648000 	C:\Windows\SYSTEM32\DEVOBJ.dll
+0x0000000071ae0000 - 0x0000000071aef000 	C:\Program Files\Java\jdk1.8.0_111\jre\bin\verify.dll
+0x0000000071ab0000 - 0x0000000071ad9000 	C:\Program Files\Java\jdk1.8.0_111\jre\bin\java.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=UTF-8 
+java_command: org.group2.webapp.web.util.MailSender
+java_class_path (initial): C:\Users\Son\git\ec-management\target\classes;C:\Users\Son\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\1.5.1.RELEASE\spring-boot-starter-data-jpa-1.5.1.RELEASE.jar;C:\Users\Son\.m2\repository\org\springframework\boot\spring-boot-starter\1.5.1.RELEASE\spring-boot-starter-1.5.1.RELEASE.jar;C:\Users\Son\.m2\repository\org\springframework\boot\spring-boot-starter-logging\1.5.1.RELEASE\spring-boot-starter-logging-1.5.1.RELEASE.jar;C:\Users\Son\.m2\repository\ch\qos\logback\logback-classic\1.1.9\logback-classic-1.1.9.jar;C:\Users\Son\.m2\repository\ch\qos\logback\logback-core\1.1.9\logback-core-1.1.9.jar;C:\Users\Son\.m2\repository\org\slf4j\jul-to-slf4j\1.7.22\jul-to-slf4j-1.7.22.jar;C:\Users\Son\.m2\repository\org\slf4j\log4j-over-slf4j\1.7.22\log4j-over-slf4j-1.7.22.jar;C:\Users\Son\.m2\repository\org\yaml\snakeyaml\1.17\snakeyaml-1.17.jar;C:\Users\Son\.m2\repository\org\springframework\boot\spring-boot-starter-aop\1.5.1.RELEASE\spring-boot-starter-aop-1.5.1.RELEASE.jar;C:\Users\Son\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar;C:\Users\Son\.m2\repository\org\hibernate\hibernate-core\5.0.11.Final\hibernate-core-5.0.11.Final.jar;C:\Users\Son\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.1-api\1.0.0.Final\hibernate-jpa-2.1-api-1.0.0.Final.jar;C:\Users\Son\.m2\repository\org\javassist\javassist\3.21.0-GA\javassist-3.21.0-GA.jar;C:\Users\Son\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\Son\.m2\repository\org\jboss\jandex\2.0.0.Final\jandex-2.0.0.Final.jar;C:\Users\Son\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;C:\Users\Son\.m2\repository\org\hibernate\common\hibernate-commons-annotations\5.0.1.Final\hibernate-commons-annotations-5.0.1.Final.jar;C:\Users\Son\.m2\repository\org\hibernate\hibernate-entitymanager\5.0.11.Final\hibernate-entitymanager-5.0.11.Final.jar;C:\Users\Son\.m2\repository\javax\transaction\javax.transaction-api\1.2\javax.transaction-api-1.2.j
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_111
+PATH=C:/Program Files/Java/jre1.8.0_111/bin/server;C:/Program Files/Java/jre1.8.0_111/bin;C:/Program Files/Java/jre1.8.0_111/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\MongoDB\Server\3.4\bin;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\lua;C:\Program Files\Java\jdk1.8.0_111\bin;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\nodejs\;C:\Portable Apps\apache-maven\bin;E:\PortableApp\lua;C:\Program Files\OpenVPN\bin;C:\Users\Son\AppData\Roaming\npm;E:\eclipse-jee-neon-3-win32-x86_64\eclipse;
+USERNAME=Son
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 42 Stepping 7, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 8.1 , 64 bit Build 9600 (6.3.9600.17415)
+
+CPU:total 4 
+
+Memory: 4k page, physical 4099980k(155716k free), swap 7245708k(8588k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.111-b14) for windows-amd64 JRE (1.8.0_111-b14), built on Sep 22 2016 19:24:05 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Sat Apr 29 21:40:09 2017
+elapsed time: 1 seconds (0d 0h 0m 1s)
+
